@@ -132,9 +132,9 @@ sign = ecc.sign(data, privateKey)
 // dapp生成的用于钱包扫描的二维码数据格式
 {
 	protocol    string   // 协议名，钱包用来区分不同协议，本协议为 SimpleWallet
-    version     string   // 协议版本信息，如1.0
+        version     string   // 协议版本信息，如1.0
 	dappName    string   // dapp名字，用于在钱包APP中展示，可选
-    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选
+        dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选
 	action      string   // 支付时，赋值为transfer，必须
 	from        string   // 付款人的EOS账号，可选
 	to          string   // 收款人的EOS账号，必须
@@ -167,7 +167,7 @@ sign = ecc.sign(data, privateKey)
 	version     string   // 协议版本信息，如1.0
 	action      string   // 支付时，赋值为transfer
 	dappName    string   // dapp名字，用于在钱包APP中展示，可选
-    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选	
+        dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选	
 	from        string   // 付款人的EOS账号，可选
 	to          string   // 收款人的EOS账号，必须
 	amount      number   // 转账数量，必须
@@ -193,12 +193,12 @@ sign = ecc.sign(data, privateKey)
 // web生成的用于钱包扫描的二维码数据格式
 {
 	protocol    string   // 协议名，钱包用来区分不同协议，本协议为 SimpleWallet
-    version     string   // 协议版本信息，如1.0
+        version     string   // 协议版本信息，如1.0
 	dappName    string   // dapp名字，用于在钱包APP中展示，可以是bp名字，可选
-    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可以是bp的logo，可选
+        dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可以是bp的logo，可选
 	action      string   // 投票时，赋值为vote，必须
 	producers   array    //bp 用户名列表
-    callback    string   // 用户完成操作后，钱包回调拉起dapp移动端的回调URL,如appABC://abc.com?action=vote，可选
+        callback    string   // 用户完成操作后，钱包回调拉起dapp移动端的回调URL,如appABC://abc.com?action=vote，可选
     		             // 钱包回调时在此URL后加上操作结果(result、txID)，如：appABC://abc.com?action=vote&result=1&txID=xxx, 
 }
 ```
