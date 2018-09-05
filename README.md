@@ -29,6 +29,10 @@ SimpleWallet是一个EOS钱包和dapp的通用对接协议。
 2. 场景2：dapp的移动端拉起钱包APP请求支付授权
 3. 场景3：钱包APP内嵌dapp的H5页面，进行支付（暂无）
 
+- 投票
+1. 场景1：钱包扫码投票，适用于WEB版dapp
+
+
 ## 协议内容
 
 ### 1. 钱包APP在系统注册拦截协议
@@ -128,9 +132,9 @@ sign = ecc.sign(data, privateKey)
 // dapp生成的用于钱包扫描的二维码数据格式
 {
 	protocol    string   // 协议名，钱包用来区分不同协议，本协议为 SimpleWallet
-    	version     string   // 协议版本信息，如1.0
+    version     string   // 协议版本信息，如1.0
 	dappName    string   // dapp名字，用于在钱包APP中展示，可选
-    	dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选
+    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选
 	action      string   // 支付时，赋值为transfer，必须
 	from        string   // 付款人的EOS账号，可选
 	to          string   // 收款人的EOS账号，必须
@@ -163,7 +167,7 @@ sign = ecc.sign(data, privateKey)
 	version     string   // 协议版本信息，如1.0
 	action      string   // 支付时，赋值为transfer
 	dappName    string   // dapp名字，用于在钱包APP中展示，可选
-    	dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选	
+    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选	
 	from        string   // 付款人的EOS账号，可选
 	to          string   // 收款人的EOS账号，必须
 	amount      number   // 转账数量，必须
@@ -181,6 +185,24 @@ sign = ecc.sign(data, privateKey)
 - 钱包组装上述数据，生成一笔EOS的transaction，用户授权此笔转账后，提交转账数据到EOS主网；如果有callback，则回调拉起dapp的应用
 - dapp可根据callback里的txID去主网查询此笔交易（不能完全依赖此方式来确认用户的付款）；或自行搭建节点监控EOS主网，检查代币是否到账
 - 对于流行币种如IQ，如果二维码中给出的contract名和官方的合约名不一致，钱包方要提醒用户，做二次确认
+
+### 3. 投票
+#### 场景1：钱包扫描二维码进行投票
+
+```
+// web生成的用于钱包扫描的二维码数据格式
+{
+	protocol    string   // 协议名，钱包用来区分不同协议，本协议为 SimpleWallet
+    version     string   // 协议版本信息，如1.0
+	dappName    string   // dapp名字，用于在钱包APP中展示，可以是bp名字，可选
+    dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可以是bp的logo，可选
+	action      string   // 投票时，赋值为vote，必须
+	producers   array    //bp 用户名列表
+    callback    string   // 用户完成操作后，钱包回调拉起dapp移动端的回调URL,如appABC://abc.com?action=vote，可选
+    		             // 钱包回调时在此URL后加上操作结果(result、txID)，如：appABC://abc.com?action=vote&result=1&txID=xxx, 
+}
+```
+- 钱包组装上述数据，生成一笔EOS的transaction，用户授权此操作后，提交投票数据到EOS主网；若有callback参数，则进行回调访问
 
 ### 错误处理
 - code不等于0则请求失败
