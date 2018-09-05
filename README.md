@@ -197,7 +197,6 @@ sign = ecc.sign(data, privateKey)
 	dappName    string   // dapp名字，用于在钱包APP中展示，可以是bp名字，可选
         dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可以是bp的logo，可选
 	action      string   // 投票时，赋值为vote，必须
-        voter       string   // 投票人
 	producers   array    //bp 用户名列表
         callback    string   // 用户完成操作后，钱包回调拉起dapp移动端的回调URL,如appABC://abc.com?action=vote，可选
     		             // 钱包回调时在此URL后加上操作结果(result、txID)，如：appABC://abc.com?action=vote&result=1&txID=xxx, 
